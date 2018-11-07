@@ -1,0 +1,41 @@
+<div *ngIf="movie.title">
+  <h2 id="h2" class='pahe-header' *ngIf="movie.title">{{movie.title}}</h2>
+  <div *ngIf="length>0">
+    <ul class="list-group">
+      <li *ngFor="let item of videos" class="list-group-item">
+        <iframe width="600" height="400" [src]="getEmbedUrl(item)">
+        </iframe>
+        <p>{{movie.overview}}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="imgonly" *ngIf="length==0">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <img alt="{{movie.title}}" src="{{movie.poster_src}}">
+        <p>{{movie.overview}}</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="tvshow.name" id='novid'>
+  <h2 class='pahe-header' *ngIf="tvshow.name">{{tvshow.name}}</h2>
+  <div *ngIf="length>0">
+    <ul class="list-group">
+      <li *ngFor="let item of videos" class="list-group-item">
+        <iframe width="600" height="400" [src]="getEmbedUrl(item)">
+        </iframe>
+        <p>{{tvshow.overview}}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="imgonly" *ngIf="length==0">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <img alt="{{tvshow.name}}" src="{{tvshow.poster_src}}">
+        <p>{{tvshow.overview}}</p>
+      </li>
+    </ul>
+  </div>
+</div>

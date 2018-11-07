@@ -1,0 +1,47 @@
+<ul class="nav nav-tabs">
+  <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+    <a id='a1' routerLink="/movies">Movies</a>
+  </li>
+  <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+    <a id='a1' routerLink="/tvshows">TV shows</a>
+  </li>
+</ul>
+
+<form [formGroup]="form">
+  <div class="form-group">
+    <div [ngClass]="{'has-error': (form.controls.searchbar.errors && form.controls.searchbar.dirty), 'has-success': !form.controls.searchbar.errors}">
+      <input type="text" name="searchbar" class="form-control placeicon" placeholder="&#xf002; Search..."
+        formControlName="searchbar" (keyup)="search()" />
+      <!-- Validation -->
+      <ul class="help-block">
+        <li *ngIf="form.controls.searchbar.errors?.minlength && form.controls.searchbar.dirty">Minimum
+          characters: 3</li>
+        <li *ngIf="form.controls.searchbar.errors?.validateSearchbar && form.controls.searchbar.dirty">searchbar must
+          not
+          have any special characters</li>
+      </ul>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="searchActive">
+  <ul class="list-group">
+    <li *ngFor="let item of tvshows; let i = index" class="list-group-item">
+      <h4>{{i+1}}. {{item.name}}</h4>
+      <hr>
+      <div id="prikaz">
+        <img id="searchimg" alt="{{item.name}}" src="{{item.poster_src}}" (click)="showTvshow(item.id)">
+        <p>{{item.overview}}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="!searchActive">
+  <div *ngFor="let item of tvshows; let i = index">
+    <div id="top10">
+      <img id='top10img' alt="{{item.name}}" src="{{item.poster_src}}" (click)="showTvshow(item.id)">
+      <h5><span class="highlight">{{i+1}}.</span> {{item.name}}</h5>
+    </div>
+  </div>
+</div>
